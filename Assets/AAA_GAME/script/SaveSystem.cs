@@ -3,9 +3,24 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-    public Player player;
-
+    public PlayerData player;
     // Méthode pour sauvegarder les données du joueur dans un fichier JSON
+    void Start()
+    {
+        player.question_1 = false;
+        player.question_2 = false;
+        player.question_3 = false;
+        player.question_4 = false;
+        player.question_5 = false;
+
+        SavePlayerData();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+            SavePlayerData();
+    }
+
     public void SavePlayerData()
     {
         // Créer un objet PlayerData à partir des données du joueur actuel

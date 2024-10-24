@@ -1,102 +1,112 @@
-//using System;
-//using System.Collections;
-//using System.Collections.Generic;
-//using TMPro;
-//using UnityEditor;
-//using UnityEngine;
-//using UnityEngine.UI;
+using Platformer.Mechanics;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
 
-//public class DialogueManager : MonoBehaviour
-//{
-//    public static DialogueManager Instance;
-//    //permet d'accéder au dialogue manager
+public class DialogueManager : MonoBehaviour
+{
+    public static DialogueManager Instance;
+    //permet d'accéder au dialogue manager
 
-//    public Image CharacterIcon;
-//    public TextMeshProUGUI characterName;
-//    public TextMeshProUGUI dialogueArea;
-//    //référence pour les composents Ui dans unity
+    public TextMeshProUGUI characterName;
+    public TextMeshProUGUI dialogueArea;
+    //référence pour les composents Ui dans unity
 
-//    private Queue<DialogueLine> lines;
-//    // ont choisit une queue et non une liste parce que queue.Enqueue() ajouter des élèment a la fin de la queue et Dequeue retire le premier élèment
-//    // donc le premier élément disparaitra plus vite que le dernier , plus facile pour lire
+    private Queue<DialogueLine> lines;
+    // ont choisit une queue et non une liste parce que queue.Enqueue() ajouter des élèment a la fin de la queue et Dequeue retire le premier élèment
+    // donc le premier élément disparaitra plus vite que le dernier , plus facile pour lire
 
-//    public bool isDialogueActive;
-//    //dialogue active
-//    public float typingSpeed = 0.2f;
-//    //vitesse de frappe du text
+    public bool isDialogueActive;
+    //dialogue active
+    public float typingSpeed = 0.2f;
+    //vitesse de frappe du text
 
-//    public CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
 
-//    void Awake()
-//    {
-//        if (Instance == null)
-//        {
-//            Instance = this;
-//        }
-//        lines = new Queue<DialogueLine>();
 
-//    }
-//    private void Start()
-//    {
-//        canvasGroup = GetComponent<CanvasGroup>();
-//    }
-//    public void StartDialogue(Dialogue dialogue)
-//    {
-//        isDialogueActive = true;
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        lines = new Queue<DialogueLine>();
 
-//        lines.Clear();
+    }
+    private void Start()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
+    public void StartDialogue(Dialogue dialogue)
+    {
+        isDialogueActive = true;
 
-//        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
-//        {
-//            lines.Enqueue(dialogueLine);
-//        }
-//        DisplayNextDialogueLine();
-//    }
+        lines.Clear();
 
-//    public void DisplayNextDialogueLine()
-//    {
-//        if (lines.Count == 0)
-//        {
-//            EndDialogue();
-//            return;
-//        }
+        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
+        {
+            lines.Enqueue(dialogueLine);
+        }
+        DisplayNextDialogueLine();
+    }
 
-//        DialogueLine currentLine = lines.Dequeue();
+    public void DisplayNextDialogueLine()
+    {
+        if (lines.Count == 0)
+        {
+            
+            EndDialogue(); 
+            return;
+        }
 
-//        CharacterIcon.sprite = currentLine.character.icon;
-//        characterName.text = currentLine.character.name;
+        DialogueLine currentLine = lines.Dequeue();
 
-//        StopAllCoroutines();
-//        StartCoroutine(TypeSentence(currentLine));
-//    }
+        characterName.text = currentLine.character.name;
 
-//    IEnumerator TypeSentence(DialogueLine dialogueLine)
-//    {
-//        dialogueArea.text = "";
-//        foreach (Char letter in dialogueLine.line.ToCharArray())
-//        {
-//            dialogueArea.text += letter;
-//            yield return new WaitForSeconds(typingSpeed);
-//        }
-//    }
-//    void EndDialogue()
-//    {
-//        isDialogueActive = false;
-//    }
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(currentLine));
 
-//    void Update()
-//    {
-//        if (!isDialogueActive)
-//        {
-//            canvasGroup.alpha = 0f;
-//            canvasGroup.interactable = false;
-//            canvasGroup.blocksRaycasts = false;
-//        }
-//        else
-//        {
-//            canvasGroup.alpha = 1f;
-//            canvasGroup.interactable = true;
-//            canvasGroup.blocksRaycasts = true;
-//        }
-//    }
-//}
+        
+    }
+
+    IEnumerator TypeSentence(DialogueLine dialogueLine)
+    {
+        dialogueArea.text = "";
+        foreach (Char letter in dialogueLine.line.ToCharArray())
+        {
+            dialogueArea.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+    }
+    void EndDialogue()
+    {
+        isDialogueActive = false;
+        GameObject player = GameObject.FindWithTag("Player");
+        PlayerController playerControl = player.GetComponent<PlayerController>();
+        playerControl.enabled = true;
+    }
+
+    void Update()
+    {
+        if (!isDialogueActive)
+        {
+            canvasGroup.alpha = 0f;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
+        else
+        {
+            canvasGroup.alpha = 1f;
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+        }
+
+    }
+
+
+}

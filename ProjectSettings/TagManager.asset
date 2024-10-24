@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TutorialRequirement
+  - Q1
+  - managerlayer
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Question_1
   - 
   - 
   - 
@@ -41,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background1L
+    uniqueID: 763865247
+    locked: 0
+  - name: background2L
+    uniqueID: 268746881
+    locked: 0
+  - name: background3L
+    uniqueID: 4242604749
+    locked: 0
+  - name: Niveau
+    uniqueID: 3614526251
     locked: 0
