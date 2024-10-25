@@ -7,6 +7,7 @@ TagManager:
   - TutorialRequirement
   - Q1
   - managerlayer
+  - Q2
   layers:
   - Default
   - TransparentFX

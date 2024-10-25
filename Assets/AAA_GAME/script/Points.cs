@@ -1,16 +1,30 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Points : MonoBehaviour
 {
-    public DialogueManager manager;
-    public int score = 0;
+    [DllImport("__Internal")]
+    private static extern void ButtonClicked(int score,List <bool> answers);
 
-    public void PlusOne()
+    public GameObject btn_go;
+    public int score = 0;
+    public List<bool> answers = new List<bool>();
+
+    private void Start()
     {
-        score+=1;
-        manager.DisplayNextDialogueLine();
+        Button btn = btn_go.GetComponent<UnityEngine.UI.Button>();
+
+        btn.onClick.AddListener(SendMessageToReact);
+    }
+    
+
+    void SendMessageToReact()
+    {
+        #if UNITY_WEBGL == true && UNITY_EDITOR == false 
+            ButtonClicked(score, answers);
+        #endif
     }
 }
