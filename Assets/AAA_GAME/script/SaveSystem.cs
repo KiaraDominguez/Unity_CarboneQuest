@@ -4,7 +4,7 @@ using UnityEngine;
 public class SaveSystem : MonoBehaviour
 {
     public PlayerData player;
-    // Méthode pour sauvegarder les données du joueur dans un fichier JSON
+    // Mï¿½thode pour sauvegarder les donnï¿½es du joueur dans un fichier JSON
     void Start()
     {
         player.question_1 = false;
@@ -23,13 +23,13 @@ public class SaveSystem : MonoBehaviour
 
     public void SavePlayerData()
     {
-        // Créer un objet PlayerData à partir des données du joueur actuel
+        // Crï¿½er un objet PlayerData ï¿½ partir des donnï¿½es du joueur actuel
         PlayerData data = new PlayerData(player);
 
         // Convertir l'objet en format JSON
-        string json = JsonUtility.ToJson(data, true); // Le paramètre `true` rend le JSON formaté avec des indentations
+        string json = JsonUtility.ToJson(data, true); // Le paramï¿½tre `true` rend le JSON formatï¿½ avec des indentations
 
-        // Spécifier le chemin où le fichier JSON sera sauvegardé (ici dans le dossier "persistentDataPath")
+        // Spï¿½cifier le chemin oï¿½ le fichier JSON sera sauvegardï¿½ (ici dans le dossier "persistentDataPath")
         string path = Application.persistentDataPath + "/playerData.json";
 
         // Sauvegarder le fichier JSON sur le disque

@@ -11,15 +11,15 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    //permet d'accéder au dialogue manager
+    //permet d'accï¿½der au dialogue manager
 
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
-    //référence pour les composents Ui dans unity
+    //rï¿½fï¿½rence pour les composents Ui dans unity
 
     private Queue<DialogueLine> lines;
-    // ont choisit une queue et non une liste parce que queue.Enqueue() ajouter des élèment a la fin de la queue et Dequeue retire le premier élèment
-    // donc le premier élément disparaitra plus vite que le dernier , plus facile pour lire
+    // ont choisit une queue et non une liste parce que queue.Enqueue() ajouter des ï¿½lï¿½ment a la fin de la queue et Dequeue retire le premier ï¿½lï¿½ment
+    // donc le premier ï¿½lï¿½ment disparaitra plus vite que le dernier , plus facile pour lire
 
     public bool isDialogueActive;
     //dialogue active

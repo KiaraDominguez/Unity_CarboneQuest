@@ -11,7 +11,7 @@ public class PlayerData
     public bool question_4 ;
     public bool question_5 ;
 
-    // Constructeur pour initialiser les données du joueur
+    // Constructeur pour initialiser les donnï¿½es du joueur
     public PlayerData(PlayerData player)
     {
         question_1 = player.question_1;

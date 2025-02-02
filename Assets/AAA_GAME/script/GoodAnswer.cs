@@ -24,10 +24,10 @@ public class GoodAnswer : MonoBehaviour
 
     }
 
-    // La méthode appelée lorsque le bouton est cliqué ou que la barre d'espace est pressée
+    // La mï¿½thode appelï¿½e lorsque le bouton est cliquï¿½ ou que la barre d'espace est pressï¿½e
     void OnButtonClicked()
     {
-        Debug.Log("Bouton activé par la barre d'espace ou un clic !");
-        // Ajouter votre logique ici, par exemple, changer de scène ou lancer une action.
+        Debug.Log("Bouton activï¿½ par la barre d'espace ou un clic !");
+        // Ajouter votre logique ici, par exemple, changer de scï¿½ne ou lancer une action.
     }
 }
